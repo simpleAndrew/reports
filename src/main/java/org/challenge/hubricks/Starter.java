@@ -25,6 +25,8 @@ public class Starter {
     public static final String INCOME_BY_DEPARTMENT_REPORT_FILE_NAME = "income-by-department.csv";
     public static final String INCOME_95_BY_DEPARTMENT_REPORT_FILE_NAME = "income-95-by-department.csv";
     public static final String INCOME_AVERAGE_BY_AGE_RANGE_REPORT_FILE_NAME = "income-average-by-age-range.csv";
+    public static final int UNKNOWN_AGE = 0;
+    public static final String UNKNOWN_DEPARTMENT = "Unknown Department";
 
     public static void main(String[] args) throws IOException {
         assert args.length > 0;
@@ -41,8 +43,8 @@ public class Starter {
         EmployeeDataHolder employeeDataHolder = EmployeeDataHolder.buildDao(employeesPath);
         AgeDataHolder ageDataHolder = AgeDataHolder.buildDao(agesPath);
 
-        Function<Employee, Integer> ageProvider = employee -> ageDataHolder.lookForAge(employee.getName()).orElse(0);
-        Function<Integer, String> getDepartmentByIndex = deptId -> departmentDataHolder.lookForDepartment(deptId).orElse("Unknown Department");
+        Function<Employee, Integer> ageProvider = employee -> ageDataHolder.lookForAge(employee.getName()).orElse(UNKNOWN_AGE);
+        Function<Integer, String> getDepartmentByIndex = deptId -> departmentDataHolder.lookForDepartment(deptId).orElse(UNKNOWN_DEPARTMENT);
 
         AverageIncomeByAgeReportBuilder incomeByAgeBuilder =
                 new AverageIncomeByAgeReportBuilder(ageProvider);
@@ -81,10 +83,14 @@ public class Starter {
 
         csvReportWriterBuilder
                 .withHeaders("Age Range", "Average Income")
-                .withFirstColumnResolvedAs(ageBucket -> ageBucket - 1 + "0-" + ageBucket + "0")
+                .withFirstColumnResolvedAs(Starter::buildAgeBucketStringRepresentation)
                 .toFile(INCOME_AVERAGE_BY_AGE_RANGE_REPORT_FILE_NAME)
                 .ofDoubles()
                 .writeReport(incomeByAgeBuilder.buildReport(employeeDataHolder.getEmployeeStream()));
+    }
+
+    private static String buildAgeBucketStringRepresentation(int ageBucket) {
+        return String.format("(%d-%d]", (ageBucket - 1) * 10, ageBucket * 10);
     }
 
     public static class CsvReportWriterBuilder {
