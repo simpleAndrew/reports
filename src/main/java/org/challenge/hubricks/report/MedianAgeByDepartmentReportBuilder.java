@@ -13,7 +13,7 @@ import static java.util.stream.Collectors.groupingBy;
 import static java.util.stream.Collectors.mapping;
 import static java.util.stream.Collectors.toList;
 
-public class MedianAgeByDepartmentReportBuilder implements EmployeeReportBuilder<Integer> {
+public class MedianAgeByDepartmentReportBuilder implements EmployeeReportBuilder<Integer, Integer> {
 
     private static final Statistics<Integer> STATS = Statistics.ofIntegers();
 

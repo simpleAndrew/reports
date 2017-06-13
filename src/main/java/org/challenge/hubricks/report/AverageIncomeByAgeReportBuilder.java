@@ -9,7 +9,7 @@ import java.util.stream.Stream;
 
 import static java.util.stream.Collectors.groupingBy;
 
-public class AverageIncomeByAgeReportBuilder implements EmployeeReportBuilder<Double> {
+public class AverageIncomeByAgeReportBuilder implements EmployeeReportBuilder<Integer, Double> {
 
     private static final int AGE_BUCKET_STEP = 10;
 

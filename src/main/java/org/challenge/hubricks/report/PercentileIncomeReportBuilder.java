@@ -12,7 +12,7 @@ import static java.util.stream.Collectors.groupingBy;
 import static java.util.stream.Collectors.mapping;
 import static java.util.stream.Collectors.toList;
 
-public class PercentileIncomeReportBuilder implements EmployeeReportBuilder<Double> {
+public class PercentileIncomeReportBuilder implements EmployeeReportBuilder<Integer, Double> {
 
     public static final Statistics<Double> STATS = Statistics.ofDoubles();
 
