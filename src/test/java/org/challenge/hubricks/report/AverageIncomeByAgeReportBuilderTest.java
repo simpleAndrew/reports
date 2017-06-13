@@ -13,6 +13,22 @@ import static org.junit.Assert.assertEquals;
 public class AverageIncomeByAgeReportBuilderTest {
 
     @Test
+    public void shouldCalculateMedianOnOneEmployee() throws Exception {
+        Map<Integer, Double> expectedAgesReport = new HashMap<>();
+        expectedAgesReport.put(2, 1000.5);
+
+        testFile("reports/input/incomeByAge/oneEmployee.csv", expectedAgesReport);
+    }
+
+    @Test
+    public void shouldCalculateMedianOnEmployeesInSameDozen() throws Exception {
+        Map<Integer, Double> expectedAgesReport = new HashMap<>();
+        expectedAgesReport.put(3, 20500.25);
+
+        testFile("reports/input/incomeByAge/2employeeInSameDozen.csv", expectedAgesReport);
+    }
+
+    @Test
     public void shouldCalculateMedianOnMultipleEmployeesPer3Departments() throws Exception {
         Map<Integer, Double> expectedAgesReport = new HashMap<>();
         expectedAgesReport.put(2, 2000.0);
