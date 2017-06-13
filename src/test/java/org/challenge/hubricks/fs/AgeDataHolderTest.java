@@ -1,4 +1,4 @@
-package org.challenge.hubricks.dao;
+package org.challenge.hubricks.fs;
 
 import org.challenge.hubricks.utils.TestFileUtils;
 import org.junit.Test;
@@ -9,7 +9,7 @@ import java.util.Optional;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 
-public class AgesCsvDaoTest {
+public class AgeDataHolderTest {
 
     @Test
     public void supposeToReadAgeFromRealFile() throws Exception {
@@ -19,8 +19,8 @@ public class AgesCsvDaoTest {
         int expectedAge = 23;
 
         //when
-        AgesCsvDao agesCsvDao = AgesCsvDao.buildDao(pathToResource);
-        int age = agesCsvDao.getAge(employeeName).get();
+        AgeDataHolder ageDataHolder = AgeDataHolder.buildDao(pathToResource);
+        int age = ageDataHolder.lookForAge(employeeName).get();
 
         //then
         assertEquals("Age suppose to be read as expected", expectedAge, age);
@@ -33,8 +33,8 @@ public class AgesCsvDaoTest {
         String employeeName = "Opal Ballard";
 
         //when
-        AgesCsvDao agesCsvDao = AgesCsvDao.buildDao(pathToResource);
-        Optional<Integer> age = agesCsvDao.getAge(employeeName);
+        AgeDataHolder ageDataHolder = AgeDataHolder.buildDao(pathToResource);
+        Optional<Integer> age = ageDataHolder.lookForAge(employeeName);
 
         //then
         assertFalse("Age should be missing", age.isPresent());

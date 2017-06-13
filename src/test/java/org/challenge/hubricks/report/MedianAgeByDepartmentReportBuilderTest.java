@@ -10,7 +10,7 @@ import java.util.Map;
 
 import static org.junit.Assert.assertEquals;
 
-public class MedianAgeByDepartmentTest {
+public class MedianAgeByDepartmentReportBuilderTest {
 
     @Test
     public void shouldBuildReportOnStreamOfOne() throws Exception {
@@ -50,7 +50,7 @@ public class MedianAgeByDepartmentTest {
     private void testFile(String resourceLocation, Map<Integer, Integer> expectedResult) throws IOException {
         AgedEmployeeTestBean agedEmployeeTestBean = AgedEmployeeTestBean.buildFrom(TestFileUtils.readTestCsvResource(resourceLocation));
 
-        MedianAgeByDepartment averageAgeBuilder = new MedianAgeByDepartment(agedEmployeeTestBean.getAgeProducer());
+        MedianAgeByDepartmentReportBuilder averageAgeBuilder = new MedianAgeByDepartmentReportBuilder(agedEmployeeTestBean.getAgeProducer());
         Map<Integer, Integer> generatedReport = averageAgeBuilder.buildReport(agedEmployeeTestBean.getEmployees().stream());
 
         assertEquals(expectedResult, generatedReport);

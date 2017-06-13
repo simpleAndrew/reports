@@ -1,4 +1,4 @@
-package org.challenge.hubricks.dao;
+package org.challenge.hubricks.fs;
 
 import java.io.IOException;
 import java.nio.file.Path;
@@ -8,18 +8,18 @@ import java.util.Objects;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
-public class AgesCsvDao {
+public class AgeDataHolder {
 
     private final Path filePath;
     private Map<String, Integer> nameToAge;
 
-    public static AgesCsvDao buildDao(Path filePath) throws IOException {
-        AgesCsvDao agesCsvDao = new AgesCsvDao(filePath);
-        agesCsvDao.loadData();
-        return agesCsvDao;
+    public static AgeDataHolder buildDao(Path filePath) throws IOException {
+        AgeDataHolder ageDataHolder = new AgeDataHolder(filePath);
+        ageDataHolder.loadData();
+        return ageDataHolder;
     }
 
-    private AgesCsvDao(Path filePath) {
+    private AgeDataHolder(Path filePath) {
         this.filePath = filePath;
     }
 
@@ -31,7 +31,7 @@ public class AgesCsvDao {
     }
 
 
-    public Optional<Integer> getAge(String employeeName) {
+    public Optional<Integer> lookForAge(String employeeName) {
         return Optional.ofNullable(nameToAge.getOrDefault(employeeName, null));
     }
 

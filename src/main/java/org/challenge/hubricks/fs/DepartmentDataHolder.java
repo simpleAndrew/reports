@@ -1,4 +1,4 @@
-package org.challenge.hubricks.dao;
+package org.challenge.hubricks.fs;
 
 import java.io.IOException;
 import java.nio.file.Path;
@@ -8,19 +8,19 @@ import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-public class DepartmentCsvDao {
+public class DepartmentDataHolder {
 
     private List<String> sortedDepartments;
 
     private final Path fileLocation;
 
-    public static DepartmentCsvDao buildDao(Path dataFolder) throws IOException {
-        DepartmentCsvDao dao = new DepartmentCsvDao(dataFolder);
+    public static DepartmentDataHolder buildDao(Path dataFolder) throws IOException {
+        DepartmentDataHolder dao = new DepartmentDataHolder(dataFolder);
         dao.readDepartments();
         return dao;
     }
 
-    private DepartmentCsvDao(Path filelocation) {
+    private DepartmentDataHolder(Path filelocation) {
         this.fileLocation = filelocation;
     }
 
@@ -42,18 +42,18 @@ public class DepartmentCsvDao {
     }
 
     public String getDepartmentByIndex(int index) {
-        if (index <0 || index >= sortedDepartments.size()) {
+        if (index < 1 || index > sortedDepartments.size()) {
             throw new RuntimeException("Unknown department ID detected");
         }
 
-        return sortedDepartments.get(index);
+        return sortedDepartments.get(index - 1);
     }
 
     public Optional<String> lookForDepartment(int index) {
-        if (index <0 || index >= sortedDepartments.size()) {
+        if (index < 1 || index > sortedDepartments.size()) {
             return Optional.empty();
         }
 
-        return Optional.of(sortedDepartments.get(index));
+        return Optional.of(sortedDepartments.get(index - 1));
     }
 }

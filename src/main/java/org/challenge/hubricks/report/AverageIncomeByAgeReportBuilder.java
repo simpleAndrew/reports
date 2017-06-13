@@ -31,6 +31,6 @@ public class AverageIncomeByAgeReportBuilder implements EmployeeReportBuilder<Do
     }
 
     private Integer extractAgeBucket(Employee employee) {
-        return ageProvider.apply(employee) / bucketSize;
+        return 1 + ageProvider.apply(employee) / bucketSize;
     }
 }

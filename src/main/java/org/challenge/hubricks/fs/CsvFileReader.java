@@ -1,4 +1,4 @@
-package org.challenge.hubricks.dao;
+package org.challenge.hubricks.fs;
 
 import java.io.IOException;
 import java.nio.file.Files;

@@ -1,4 +1,4 @@
-package org.challenge.hubricks.dao;
+package org.challenge.hubricks.fs;
 
 import org.challenge.hubricks.data.Employee;
 import org.challenge.hubricks.utils.TestFileUtils;
@@ -17,7 +17,7 @@ public class EmployeeDaoTest {
         Path root = TestFileUtils.getPathToResource("data/real/employees.csv");
 
         //when
-        EmployeeCsvDao dao = EmployeeCsvDao.buildDao(root);
+        EmployeeDataHolder dao = EmployeeDataHolder.buildDao(root);
         Stream<Employee> employeeStream = dao.getEmployeeStream();
 
         //then
@@ -31,7 +31,7 @@ public class EmployeeDaoTest {
         Employee expected = new Employee(6, "Opal Ballard", "f", 4350.00);
 
         //when
-        EmployeeCsvDao dao = EmployeeCsvDao.buildDao(root);
+        EmployeeDataHolder dao = EmployeeDataHolder.buildDao(root);
         Employee employee = dao.getEmployeeStream().findFirst().get();
 
         //then
@@ -45,7 +45,7 @@ public class EmployeeDaoTest {
         Employee expected = new Employee(2, "Jonathon Kim", "m", 1030.00);
 
         //when
-        EmployeeCsvDao dao = EmployeeCsvDao.buildDao(root);
+        EmployeeDataHolder dao = EmployeeDataHolder.buildDao(root);
         Employee employee = dao.getEmployeeStream().findFirst().get();
 
         //then

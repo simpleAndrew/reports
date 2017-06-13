@@ -1,4 +1,4 @@
-package org.challenge.hubricks.dao;
+package org.challenge.hubricks.fs;
 
 import org.challenge.hubricks.utils.TestFileUtils;
 import org.junit.Test;
@@ -10,7 +10,7 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotNull;
 
-public class DepartmentCsvDaoTest {
+public class DepartmentDataHolderTest {
 
     @Test
     public void shouldReadDepartmentsFromRealFile() throws Exception {
@@ -18,10 +18,23 @@ public class DepartmentCsvDaoTest {
         Path pathToDepartments = TestFileUtils.getPathToResource("data/real/departments.csv");
 
         //when
-        DepartmentCsvDao departmentCsvDao = DepartmentCsvDao.buildDao(pathToDepartments);
+        DepartmentDataHolder departmentDataHolder = DepartmentDataHolder.buildDao(pathToDepartments);
 
         //then
-        assertNotNull("Dao should be initialized", departmentCsvDao);
+        assertNotNull("Dao should be initialized", departmentDataHolder);
+    }
+
+    @Test
+    public void shouldIndexDepartmentsStartingWithOne() throws Exception {
+        //given
+        Path pathToDepartments = TestFileUtils.getPathToResource("data/real/departments.csv");
+        String expectedFirstDepartment = "Accounting";
+
+        //when
+        DepartmentDataHolder departmentDataHolder = DepartmentDataHolder.buildDao(pathToDepartments);
+
+        //then
+        assertEquals("Should return first department correctly", expectedFirstDepartment, departmentDataHolder.getDepartmentByIndex(1));
     }
 
     @Test
@@ -31,23 +44,23 @@ public class DepartmentCsvDaoTest {
         int expectedNumberOfDepartments = 7;
 
         //when
-        DepartmentCsvDao departmentCsvDao = DepartmentCsvDao.buildDao(pathToDepartments);
+        DepartmentDataHolder departmentDataHolder = DepartmentDataHolder.buildDao(pathToDepartments);
 
         //then
-        assertEquals("Should read number of departments correctly", expectedNumberOfDepartments, departmentCsvDao.getNumberOfDepartments());
+        assertEquals("Should read number of departments correctly", expectedNumberOfDepartments, departmentDataHolder.getNumberOfDepartments());
     }
 
     @Test
-    public void shouldInitDepartmentsInCorrcetOrder() throws Exception {
+    public void shouldInitDepartmentsInCorrectOrder() throws Exception {
         //given
         Path pathToDepartments = TestFileUtils.getPathToResource("data/real/departments.csv");
         String expectedFirstDepartment = "Accounting";
         String expectedLastDepartment = "Sales";
 
         //when
-        DepartmentCsvDao departmentCsvDao = DepartmentCsvDao.buildDao(pathToDepartments);
-        String firstDepartmentName = departmentCsvDao.lookForDepartment(0).get();
-        String lastDepartmentName = departmentCsvDao.lookForDepartment(6).get();
+        DepartmentDataHolder departmentDataHolder = DepartmentDataHolder.buildDao(pathToDepartments);
+        String firstDepartmentName = departmentDataHolder.lookForDepartment(1).get();
+        String lastDepartmentName = departmentDataHolder.lookForDepartment(7).get();
 
         //then
         assertEquals("Should correctly init first department", expectedFirstDepartment, firstDepartmentName);
@@ -61,8 +74,8 @@ public class DepartmentCsvDaoTest {
 
 
         //when
-        DepartmentCsvDao departmentCsvDao = DepartmentCsvDao.buildDao(pathToDepartments);
-        Optional<String> missingDepartment = departmentCsvDao.lookForDepartment(-1);
+        DepartmentDataHolder departmentDataHolder = DepartmentDataHolder.buildDao(pathToDepartments);
+        Optional<String> missingDepartment = departmentDataHolder.lookForDepartment(-1);
 
         //then
         assertFalse("Should not get normal value for missing department", missingDepartment.isPresent());

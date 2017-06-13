@@ -15,7 +15,7 @@ public class AverageIncomeByAgeReportBuilderTest {
     @Test
     public void shouldCalculateMedianOnOneEmployee() throws Exception {
         Map<Integer, Double> expectedAgesReport = new HashMap<>();
-        expectedAgesReport.put(2, 1000.5);
+        expectedAgesReport.put(3, 1000.5);
 
         testFile("reports/input/incomeByAge/oneEmployee.csv", expectedAgesReport);
     }
@@ -23,7 +23,7 @@ public class AverageIncomeByAgeReportBuilderTest {
     @Test
     public void shouldCalculateMedianOnEmployeesInSameDozen() throws Exception {
         Map<Integer, Double> expectedAgesReport = new HashMap<>();
-        expectedAgesReport.put(3, 20500.25);
+        expectedAgesReport.put(4, 20500.25);
 
         testFile("reports/input/incomeByAge/2employeeInSameDozen.csv", expectedAgesReport);
     }
@@ -31,9 +31,9 @@ public class AverageIncomeByAgeReportBuilderTest {
     @Test
     public void shouldCalculateMedianOnMultipleEmployeesPer3Departments() throws Exception {
         Map<Integer, Double> expectedAgesReport = new HashMap<>();
-        expectedAgesReport.put(2, 2000.0);
-        expectedAgesReport.put(4, 4500.0);
-        expectedAgesReport.put(5, 7000.0);
+        expectedAgesReport.put(3, 2000.0);
+        expectedAgesReport.put(5, 4500.0);
+        expectedAgesReport.put(6, 7000.0);
 
         testFile("reports/input/incomeByAge/multipleEmployeesIn3Depts.csv", expectedAgesReport);
     }

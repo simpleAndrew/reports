@@ -1,4 +1,4 @@
-package org.challenge.hubricks.dao;
+package org.challenge.hubricks.fs;
 
 import org.challenge.hubricks.data.Employee;
 
@@ -10,27 +10,27 @@ import java.util.Objects;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-public class EmployeeCsvDao {
+public class EmployeeDataHolder {
 
     private final Path filePath;
 
     private List<Employee> employees;
 
-    public static EmployeeCsvDao buildDao(Path filePath) throws IOException {
-        EmployeeCsvDao employeeDao = new EmployeeCsvDao(filePath);
+    public static EmployeeDataHolder buildDao(Path filePath) throws IOException {
+        EmployeeDataHolder employeeDao = new EmployeeDataHolder(filePath);
         employeeDao.loadDate();
 
         return employeeDao;
     }
 
-    public EmployeeCsvDao(Path filePath) {
+    public EmployeeDataHolder(Path filePath) {
         this.filePath = filePath;
     }
 
     private void loadDate() throws IOException {
         CsvFileReader csvFileReader = new CsvFileReader(filePath.toString());
         employees = csvFileReader.getDataStream()
-                .map(EmployeeCsvDao::buildOutOfLine)
+                .map(EmployeeDataHolder::buildOutOfLine)
                 .filter(Objects::nonNull)
                 .collect(Collectors.toList());
 
@@ -39,7 +39,6 @@ public class EmployeeCsvDao {
     public Stream<Employee> getEmployeeStream() {
         return employees.stream();
     }
-
 
     public static Employee buildOutOfLine(String[] columnValues) {
         try {
@@ -50,7 +49,6 @@ public class EmployeeCsvDao {
                     Double.valueOf(columnValues[3])
             );
         } catch (Exception e) {
-
             System.out.println("Failed to convert into employeeName:" + Arrays.asList(columnValues));
             return null;
         }

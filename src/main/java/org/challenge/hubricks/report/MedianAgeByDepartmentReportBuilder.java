@@ -13,13 +13,13 @@ import static java.util.stream.Collectors.groupingBy;
 import static java.util.stream.Collectors.mapping;
 import static java.util.stream.Collectors.toList;
 
-public class MedianAgeByDepartment implements EmployeeReportBuilder<Integer> {
+public class MedianAgeByDepartmentReportBuilder implements EmployeeReportBuilder<Integer> {
 
     private static final Statistics<Integer> STATS = Statistics.ofIntegers();
 
     private final Function<Employee, Integer> ageExtractor;
 
-    public MedianAgeByDepartment(Function<Employee, Integer> ageProvider) {
+    public MedianAgeByDepartmentReportBuilder(Function<Employee, Integer> ageProvider) {
         this.ageExtractor = ageProvider;
     }
 
@@ -39,6 +39,6 @@ public class MedianAgeByDepartment implements EmployeeReportBuilder<Integer> {
     }
 
     private Integer calculateMedian(List<Integer> ages) {
-        return STATS.calculatePercentile(ages, 0.5);
+        return STATS.calculatePercentile(ages,  0.5);
     }
 }
