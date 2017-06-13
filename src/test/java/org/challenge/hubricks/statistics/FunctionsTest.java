@@ -1,6 +1,5 @@
 package org.challenge.hubricks.statistics;
 
-import org.challenge.hubricks.utils.Constants;
 import org.junit.Test;
 
 import java.util.Arrays;
@@ -15,6 +14,8 @@ import static org.junit.Assert.fail;
 
 public class FunctionsTest {
 
+    private static final double ACCEPTABLE_DELTA = 0.000001;
+
     @Test
     public void shouldCalculateMedianWithOddNumberOFRecords() throws Exception {
         //given
@@ -25,7 +26,7 @@ public class FunctionsTest {
         double median = Statistics.ofDoubles().calculateMedian(values);
 
         //then
-        assertEquals(expectedMedian, median, Constants.ACCEPTABLE_DELTA);
+        assertEquals(expectedMedian, median, ACCEPTABLE_DELTA);
     }
 
     @Test
@@ -38,7 +39,7 @@ public class FunctionsTest {
         double median = Statistics.ofDoubles().calculateMedian(values);
 
         //then
-        assertEquals(expectedMedian, median, Constants.ACCEPTABLE_DELTA);
+        assertEquals(expectedMedian, median, ACCEPTABLE_DELTA);
     }
 
     @Test
@@ -51,7 +52,7 @@ public class FunctionsTest {
         double median = Statistics.ofDoubles().calculateMedian(values);
 
         //then
-        assertEquals(expectedMedian, median, Constants.ACCEPTABLE_DELTA);
+        assertEquals(expectedMedian, median, ACCEPTABLE_DELTA);
     }
 
     @Test
