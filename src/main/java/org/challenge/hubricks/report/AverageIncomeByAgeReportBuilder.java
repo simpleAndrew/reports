@@ -32,9 +32,9 @@ public class AverageIncomeByAgeReportBuilder implements EmployeeReportBuilder<Do
 
     /*
      * Assigns bucket index that holds the age of employee.
-     * Splits it in a way that 0-10 goes to 1st bucket,11-20 goes to 2nd, 21-30 - to 3rd, etc.
+     * Splits it in a way that [0-10) goes to 1st bucket,[10-20) goes to 2nd, [20-30) - to 3rd, etc.
      */
     private Integer extractAgeBucket(Employee employee) {
-        return 1 + (ageProvider.apply(employee) - 1) / AGE_BUCKET_STEP;
+        return 1 + ageProvider.apply(employee) / AGE_BUCKET_STEP;
     }
 }
