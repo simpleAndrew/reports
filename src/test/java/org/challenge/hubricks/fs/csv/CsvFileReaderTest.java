@@ -1,4 +1,4 @@
-package org.challenge.hubricks.fs;
+package org.challenge.hubricks.fs.csv;
 
 import org.junit.Test;
 

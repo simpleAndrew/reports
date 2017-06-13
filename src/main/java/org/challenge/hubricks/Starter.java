@@ -2,7 +2,7 @@ package org.challenge.hubricks;
 
 import org.challenge.hubricks.data.Employee;
 import org.challenge.hubricks.fs.AgeDataHolder;
-import org.challenge.hubricks.fs.CsvReportWriter;
+import org.challenge.hubricks.fs.csv.CsvReportWriter;
 import org.challenge.hubricks.fs.DepartmentDataHolder;
 import org.challenge.hubricks.fs.EmployeeDataHolder;
 import org.challenge.hubricks.report.AverageIncomeByAgeReportBuilder;
