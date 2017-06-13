@@ -45,7 +45,7 @@ public class Starter {
         Function<Integer, String> getDepartmentByIndex = deptId -> departmentDataHolder.lookForDepartment(deptId).orElse("Unknown Department");
 
         AverageIncomeByAgeReportBuilder incomeByAgeBuilder =
-                new AverageIncomeByAgeReportBuilder(ageProvider, 10);
+                new AverageIncomeByAgeReportBuilder(ageProvider);
 
         MedianAgeByDepartmentReportBuilder medianAgeBuilder =
                 new MedianAgeByDepartmentReportBuilder(ageProvider);

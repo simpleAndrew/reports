@@ -21,6 +21,15 @@ public class AverageIncomeByAgeReportBuilderTest {
     }
 
     @Test
+    public void shouldAssignBucketsCorrectly() throws Exception {
+        Map<Integer, Double> expectedAgesReport = new HashMap<>();
+        expectedAgesReport.put(3, 2000.0);
+        expectedAgesReport.put(2, 1000.0);
+
+        testFile("reports/input/incomeByAge/employeesWithAgeOnBounds.csv", expectedAgesReport);
+    }
+
+    @Test
     public void shouldCalculateMedianOnEmployeesInSameDozen() throws Exception {
         Map<Integer, Double> expectedAgesReport = new HashMap<>();
         expectedAgesReport.put(4, 20500.25);
@@ -41,7 +50,9 @@ public class AverageIncomeByAgeReportBuilderTest {
     private void testFile(String resourceLocation, Map<Integer, Double> expectedResult) throws IOException {
         AgedEmployeeTestBean agedEmployeeTestBean = AgedEmployeeTestBean.buildFrom(TestFileUtils.readTestCsvResource(resourceLocation));
 
-        AverageIncomeByAgeReportBuilder averageAgeBuilder = new AverageIncomeByAgeReportBuilder(agedEmployeeTestBean.getAgeProducer(), 10);
+        AverageIncomeByAgeReportBuilder averageAgeBuilder =
+                new AverageIncomeByAgeReportBuilder(agedEmployeeTestBean.getAgeProducer());
+
         Map<Integer, Double> generatedReport = averageAgeBuilder.buildReport(agedEmployeeTestBean.getEmployees().stream());
 
         assertEquals(expectedResult, generatedReport);
