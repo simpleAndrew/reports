@@ -18,7 +18,7 @@ public class DepartmentDataHolderTest {
         Path pathToDepartments = TestFileUtils.getPathToResource("data/real/departments.csv");
 
         //when
-        DepartmentDataHolder departmentDataHolder = DepartmentDataHolder.buildDao(pathToDepartments);
+        DepartmentDataHolder departmentDataHolder = DepartmentDataHolder.build(pathToDepartments);
 
         //then
         assertNotNull("Dao should be initialized", departmentDataHolder);
@@ -31,7 +31,7 @@ public class DepartmentDataHolderTest {
         String expectedFirstDepartment = "Accounting";
 
         //when
-        DepartmentDataHolder departmentDataHolder = DepartmentDataHolder.buildDao(pathToDepartments);
+        DepartmentDataHolder departmentDataHolder = DepartmentDataHolder.build(pathToDepartments);
 
         //then
         assertEquals("Should return first department correctly", expectedFirstDepartment, departmentDataHolder.getDepartmentByIndex(1));
@@ -44,7 +44,7 @@ public class DepartmentDataHolderTest {
         int expectedNumberOfDepartments = 7;
 
         //when
-        DepartmentDataHolder departmentDataHolder = DepartmentDataHolder.buildDao(pathToDepartments);
+        DepartmentDataHolder departmentDataHolder = DepartmentDataHolder.build(pathToDepartments);
 
         //then
         assertEquals("Should read number of departments correctly", expectedNumberOfDepartments, departmentDataHolder.getNumberOfDepartments());
@@ -58,7 +58,7 @@ public class DepartmentDataHolderTest {
         String expectedLastDepartment = "Sales";
 
         //when
-        DepartmentDataHolder departmentDataHolder = DepartmentDataHolder.buildDao(pathToDepartments);
+        DepartmentDataHolder departmentDataHolder = DepartmentDataHolder.build(pathToDepartments);
         String firstDepartmentName = departmentDataHolder.lookForDepartment(1).get();
         String lastDepartmentName = departmentDataHolder.lookForDepartment(7).get();
 
@@ -74,7 +74,7 @@ public class DepartmentDataHolderTest {
 
 
         //when
-        DepartmentDataHolder departmentDataHolder = DepartmentDataHolder.buildDao(pathToDepartments);
+        DepartmentDataHolder departmentDataHolder = DepartmentDataHolder.build(pathToDepartments);
         Optional<String> missingDepartment = departmentDataHolder.lookForDepartment(-1);
 
         //then

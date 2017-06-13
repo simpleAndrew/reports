@@ -17,7 +17,7 @@ public class EmployeeDataHolder {
 
     private List<Employee> employees;
 
-    public static EmployeeDataHolder buildDao(Path filePath) throws IOException {
+    public static EmployeeDataHolder build(Path filePath) throws IOException {
         EmployeeDataHolder employeeDao = new EmployeeDataHolder(filePath);
         employeeDao.loadDate();
 

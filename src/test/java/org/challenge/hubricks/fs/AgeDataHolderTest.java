@@ -19,7 +19,7 @@ public class AgeDataHolderTest {
         int expectedAge = 23;
 
         //when
-        AgeDataHolder ageDataHolder = AgeDataHolder.buildDao(pathToResource);
+        AgeDataHolder ageDataHolder = AgeDataHolder.build(pathToResource);
         int age = ageDataHolder.lookForAge(employeeName).get();
 
         //then
@@ -33,7 +33,7 @@ public class AgeDataHolderTest {
         String employeeName = "Opal Ballard";
 
         //when
-        AgeDataHolder ageDataHolder = AgeDataHolder.buildDao(pathToResource);
+        AgeDataHolder ageDataHolder = AgeDataHolder.build(pathToResource);
         Optional<Integer> age = ageDataHolder.lookForAge(employeeName);
 
         //then

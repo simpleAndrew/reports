@@ -17,7 +17,7 @@ public class EmployeeDaoTest {
         Path root = TestFileUtils.getPathToResource("data/real/employees.csv");
 
         //when
-        EmployeeDataHolder dao = EmployeeDataHolder.buildDao(root);
+        EmployeeDataHolder dao = EmployeeDataHolder.build(root);
         Stream<Employee> employeeStream = dao.getEmployeeStream();
 
         //then
@@ -31,7 +31,7 @@ public class EmployeeDaoTest {
         Employee expected = new Employee(6, "Opal Ballard", "f", 4350.00);
 
         //when
-        EmployeeDataHolder dao = EmployeeDataHolder.buildDao(root);
+        EmployeeDataHolder dao = EmployeeDataHolder.build(root);
         Employee employee = dao.getEmployeeStream().findFirst().get();
 
         //then
@@ -45,7 +45,7 @@ public class EmployeeDaoTest {
         Employee expected = new Employee(2, "Jonathon Kim", "m", 1030.00);
 
         //when
-        EmployeeDataHolder dao = EmployeeDataHolder.buildDao(root);
+        EmployeeDataHolder dao = EmployeeDataHolder.build(root);
         Employee employee = dao.getEmployeeStream().findFirst().get();
 
         //then

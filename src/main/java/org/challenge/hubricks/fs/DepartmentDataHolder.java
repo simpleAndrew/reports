@@ -16,7 +16,7 @@ public class DepartmentDataHolder {
 
     private final Path fileLocation;
 
-    public static DepartmentDataHolder buildDao(Path dataFolder) throws IOException {
+    public static DepartmentDataHolder build(Path dataFolder) throws IOException {
         DepartmentDataHolder dao = new DepartmentDataHolder(dataFolder);
         dao.readDepartments();
         return dao;
